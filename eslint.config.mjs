@@ -17,10 +17,16 @@ export default tseslint.config(
         ...globals.node,
         ...globals.jest,
       },
-      sourceType: 'commonjs',
+      // Устанавливаем module глобально для корректного парсинга импортов
+      sourceType: 'module',
       parserOptions: {
+        // Проектный сервис автоматически найдет tsconfig.json
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
+        // Позволяет ESLint корректно понимать декораторы class-validator
+        ecmaFeatures: {
+          experimentalDecorators: true,
+        },
       },
     },
   },
@@ -28,7 +34,7 @@ export default tseslint.config(
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-floating-promises': 'warn',
-      '@typescript-eslint/no-unsafe-argument': 'warn'
+      '@typescript-eslint/no-unsafe-argument': 'warn',
     },
   },
 );

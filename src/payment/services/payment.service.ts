@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Payment } from './models/payment.model';
+import { Payment } from '../models/payment.model';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
