@@ -1,4 +1,9 @@
-export type PaymentStatus = 'created' | 'pending' | 'approved' | 'declined';
+export enum PaymentStatus {
+  CREATED = 'created',
+  PENDING = 'pending',
+  APPROVED = 'approved',
+  DECLINED = 'declined',
+}
 
 export interface Payment {
   id: string;
