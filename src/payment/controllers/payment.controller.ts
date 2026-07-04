@@ -8,7 +8,7 @@ export class PaymentController {
   constructor(private readonly paymentService: PaymentService) {}
 
   @Post()
-  create(@Body() dto: CreatePaymentDto): Payment {
+  create(@Body() dto: CreatePaymentDto): Promise<Payment> {
     return this.paymentService.create(dto.amount, dto.currency);
   }
 }
