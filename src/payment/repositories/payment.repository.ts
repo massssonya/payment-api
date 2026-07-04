@@ -7,3 +7,5 @@ export interface PaymentRepository {
   delete(id: string): Promise<void>;
   findAll(): Promise<Payment[]>;
 }
+
+export const PAYMENT_REPOSITORY = 'PAYMENT_REPOSITORY';

@@ -1,12 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Payment, PaymentStatus } from '../models/payment.model';
 import { v4 as uuidv4 } from 'uuid';
+import {
+  PAYMENT_REPOSITORY,
+  PaymentRepository,
+} from '../repositories/payment.repository';
 
 @Injectable()
 export class PaymentService {
-  private payments = new Map<string, Payment>();
+  constructor(
+    @Inject(PAYMENT_REPOSITORY)
+    private readonly repository: PaymentRepository,
+  ) {}
 
-  create(amount: number, currency: string): Payment {
+  async create(amount: number, currency: string): Promise<Payment> {
     const id = uuidv4();
 
     const payment: Payment = {
@@ -18,23 +25,8 @@ export class PaymentService {
       updatedAt: new Date(),
     };
 
-    this.payments.set(id, payment);
+    const result = await this.repository.create(payment);
 
-    return payment;
-  }
-
-  private processPayment(id: string) {
-    const payment = this.payments.get(id);
-    if (payment) {
-      this.updateStatus(payment, PaymentStatus.PENDING);
-      setTimeout(() => {
-        console.log('Payment processed:', id);
-      }, 0);
-    }
-  }
-
-  private updateStatus(payment: Payment, status: PaymentStatus) {
-    payment.status = status;
-    payment.updatedAt = new Date();
+    return result;
   }
 }
