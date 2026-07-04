@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 export class PaymentService {
   private payments = new Map<string, Payment>();
 
-  create(amount: Payment['amount'], currency: Payment['currency']): Payment {
+  create(amount: number, currency: string): Payment {
     const id = uuidv4();
 
     const payment: Payment = {
