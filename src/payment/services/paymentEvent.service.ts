@@ -1,7 +1,7 @@
 import {
   PaymentEventCallback,
   PaymentEventPayload,
-} from '../../models/paymentEvent.model';
+} from '../models/paymentEvent.model';
 
 export class PaymentEventsService {
   private readonly events = new Map<string, Set<PaymentEventCallback>>();

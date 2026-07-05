@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
 
-import { PAYMENT_REPOSITORY } from './repositories/Payment/payment.repository';
-import { InMemoryPaymentRepository } from './repositories/Payment/in-memory-payment.repository';
-import { PaymentService } from './services/PaymentService/payment.service';
-import { PaymentProcessorService } from './services/PaymentProcessorService/paymentProcessor.service';
-import { PaymentController } from './controllers/PaymentController/payment.controller';
-import { PaymentEventsController } from './controllers/PaymentEventsController/paymentEvents.controller';
-import { PaymentEventsService } from './services/PaymentEventsService/payment.service';
-import { IDEMPOTENCY_REPOSITORY } from './repositories/Idempotency/idempotency.repository';
-import { IdempotencyService } from './services/IdempotencyService/idempotency.service';
-import { InMemoryIdempotencyRepository } from './repositories/Idempotency/in-memory-idempotency.repository';
+import { PAYMENT_REPOSITORY } from './repositories/payment.repository';
+import { InMemoryPaymentRepository } from './repositories/in-memory-payment.repository';
+import { PaymentService } from './services/payment.service';
+import { PaymentProcessorService } from './services/paymentProcessor.service';
+import { PaymentController } from './controllers/payment.controller';
+import { PaymentEventsController } from './controllers/paymentEvents.controller';
+import { PaymentEventsService } from './services/paymentEvent.service';
+import { IDEMPOTENCY_REPOSITORY } from './repositories/idempotency.repository';
+import { IdempotencyService } from './services/idempotency.service';
+import { InMemoryIdempotencyRepository } from './repositories/in-memory-idempotency.repository';
 
 @Module({
   controllers: [PaymentController, PaymentEventsController],

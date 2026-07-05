@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { sleep } from '../../../shared/utils/sleep';
+import { sleep } from '../../shared/utils/sleep';
 
 @Injectable()
 export class PaymentProcessorService {

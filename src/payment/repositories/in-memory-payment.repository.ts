@@ -1,5 +1,5 @@
-import { Payment } from '../../models/payment.model';
-import { PaymentRepository } from '../Payment/payment.repository';
+import { Payment } from '../models/payment.model';
+import { PaymentRepository } from './payment.repository';
 
 export class InMemoryPaymentRepository implements PaymentRepository {
   private payments = new Map<string, Payment>();

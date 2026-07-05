@@ -2,7 +2,7 @@ import { Inject } from '@nestjs/common';
 import {
   IDEMPOTENCY_REPOSITORY,
   IdempotencyRepository,
-} from '../../repositories/Idempotency/idempotency.repository';
+} from '../repositories/idempotency.repository';
 
 export class IdempotencyService {
   constructor(

@@ -1,4 +1,4 @@
-import { IdempotencyRecord } from '../../models/idempotency.model';
+import { IdempotencyRecord } from '../models/idempotency.model';
 
 export interface IdempotencyRepository {
   tryLock(key: string): Promise<boolean>;
