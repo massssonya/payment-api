@@ -1,8 +1,7 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-
-import { Payment } from '../models/payment.model';
-import { CreatePaymentDto } from '../dto/create-payment.dto/create-payment.dto';
-import { PaymentService } from '../services/PaymentService/payment.service';
+import { PaymentService } from '../../services/PaymentService/payment.service';
+import { CreatePaymentDto } from '../../dto/create-payment.dto/create-payment.dto';
+import { Payment } from '../../models/payment.model';
 
 @Controller('payments')
 export class PaymentController {
