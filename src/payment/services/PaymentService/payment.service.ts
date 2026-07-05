@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   PAYMENT_REPOSITORY,
   PaymentRepository,
-} from '../../repositories/payment.repository';
+} from '../../repositories/Payment/payment.repository';
 import { Payment, PaymentStatus } from '../../models/payment.model';
 import { PaymentProcessorService } from '../PaymentProcessorService/paymentProcessor.service';
 import { PaymentEventsService } from '../PaymentEventsService/payment.service';

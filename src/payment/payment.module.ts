@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
-import { PAYMENT_REPOSITORY } from './repositories/payment.repository';
-import { InMemoryPaymentRepository } from './repositories/in-memory-payment.repository';
+import { PAYMENT_REPOSITORY } from './repositories/Payment/payment.repository';
+import { InMemoryPaymentRepository } from './repositories/Payment/in-memory-payment.repository';
 import { PaymentService } from './services/PaymentService/payment.service';
 import { PaymentProcessorService } from './services/PaymentProcessorService/paymentProcessor.service';
 import { PaymentController } from './controllers/PaymentController/payment.controller';
