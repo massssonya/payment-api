@@ -2,7 +2,6 @@ import { PaymentStatus } from './payment.model';
 
 export interface PaymentEventPayload {
   paymentId: string;
-
   status: PaymentStatus;
   updatedAt: Date;
 }
