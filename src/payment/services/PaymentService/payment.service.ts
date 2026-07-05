@@ -6,6 +6,8 @@ import {
 } from '../../repositories/payment.repository';
 import { Payment, PaymentStatus } from '../../models/payment.model';
 import { PaymentProcessorService } from '../PaymentProcessorService/paymentProcessor.service';
+import { PaymentEventsService } from '../PaymentEventsService/payment.service';
+import { PaymentEventPayload } from '../../models/paymentEvent.model';
 
 @Injectable()
 export class PaymentService {
@@ -13,6 +15,7 @@ export class PaymentService {
     @Inject(PAYMENT_REPOSITORY)
     private readonly repository: PaymentRepository,
     private readonly paymentProcessor: PaymentProcessorService,
+    private readonly paymentEventsService: PaymentEventsService,
   ) {}
 
   async create(amount: number, currency: string): Promise<Payment> {
@@ -54,11 +57,21 @@ export class PaymentService {
     if (payment.status !== PaymentStatus.CREATED) {
       throw new NotFoundException(`Payment with id ${id} is not created`);
     }
-    return this.repository.update({
+    const updatedPayment = await this.repository.update({
       ...payment,
       status: PaymentStatus.PENDING,
       updatedAt: new Date(),
     });
+
+    const payload: PaymentEventPayload = {
+      paymentId: updatedPayment.id,
+      status: updatedPayment.status,
+      updatedAt: updatedPayment.updatedAt,
+    };
+
+    this.paymentEventsService.publish(payload);
+
+    return updatedPayment;
   }
 
   async markAsApproved(id: string): Promise<Payment> {
@@ -69,10 +82,21 @@ export class PaymentService {
     if (payment.status !== PaymentStatus.PENDING) {
       throw new NotFoundException(`Payment with id ${id} is not pending`);
     }
-    return this.repository.update({
+
+    const updatedPayment = await this.repository.update({
       ...payment,
       status: PaymentStatus.APPROVED,
       updatedAt: new Date(),
     });
+
+    const payload: PaymentEventPayload = {
+      paymentId: updatedPayment.id,
+      status: updatedPayment.status,
+      updatedAt: updatedPayment.updatedAt,
+    };
+
+    this.paymentEventsService.publish(payload);
+
+    return updatedPayment;
   }
 }
