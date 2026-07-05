@@ -7,6 +7,9 @@ import { PaymentProcessorService } from './services/PaymentProcessorService/paym
 import { PaymentController } from './controllers/PaymentController/payment.controller';
 import { PaymentEventsController } from './controllers/PaymentEventsController/paymentEvents.controller';
 import { PaymentEventsService } from './services/PaymentEventsService/payment.service';
+import { IDEMPOTENCY_REPOSITORY } from './repositories/Idempotency/idempotency.repository';
+import { IdempotencyService } from './services/IdempotencyService/idempotency.service';
+import { InMemoryIdempotencyRepository } from './repositories/Idempotency/in-memory-idempotency.repository';
 
 @Module({
   controllers: [PaymentController, PaymentEventsController],
@@ -14,9 +17,14 @@ import { PaymentEventsService } from './services/PaymentEventsService/payment.se
     PaymentService,
     PaymentProcessorService,
     PaymentEventsService,
+    IdempotencyService,
     {
       provide: PAYMENT_REPOSITORY,
       useClass: InMemoryPaymentRepository,
+    },
+    {
+      provide: IDEMPOTENCY_REPOSITORY,
+      useClass: InMemoryIdempotencyRepository,
     },
   ],
 })
